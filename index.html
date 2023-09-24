@@ -1,19 +1,135 @@
-<h3><a href="https://aem1k.com/">spinning globe embedded in JavaScript code</a></h3>
-<script>
-eval(z='p="<"+"pre>"/* ,.oq#+     ,._, */;for(y in n="zw24l6k\
-4e3t4jnt4qj24xh2 x/* =<,m#F^    A W###q. */42kty24wrt413n243n\
-9h243pdxt41csb yz/* #K       q##H######Am */43iyb6k43pk7243nm\
-r24".split(4)){/* dP      cpq#q##########b, */for(a in t=pars\
-eInt(n[y],36)+/*         p##@###YG=[#######y */(e=x=r=[]))for\
-(r=!r,i=0;t[a/*         d#qg `*PWo##q#######D */]>i;i+=.05)wi\
-th(Math)x-= /*        aem1k.com Q###KWR#### W[ */.05,0<cos(o=\
-new Date/1e3/*      .Q#########Md#.###OP  A@ , */-x/PI)&&(e[~\
-~(32*sin(o)*/* ,    (W#####Xx######.P^     T % */sin(.5+y/7))\
-+60] =-~ r);/* #y    `^TqW####P###BP           */for(x=0;122>\
-x;)p+="   *#"/* b.        OQ####x#K           */[e[x++]+e[x++\
-]]||(S=("eval"/* l         `X#####D  ,       */+"(z=\'"+z.spl\
-it(B = "\\\\")./*           G####B" #       */join(B+B).split\
-(Q="\'").join(B+Q/*          VQBP`        */)+Q+")//m1k")[x/2\
-+61*y-1]).fontcolor/*         TP         */(/\\w/.test(S)&&"#\
-03B");document.body.innerHTML=p+=B+"\\n"}setTimeout(z)')//
-</script>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>点名2.0</title>
+		<style>
+			.D1 {
+				height: 300px;
+				width: 100%;
+			}
+
+			.Dm {
+				height: 65px;
+				width: 300px;
+				font-size: 50px;
+				border-radius: 10px;
+				color: #FFA500;
+			}
+
+			button {
+				height: 40px;
+				width: 80px;
+				margin: 5px;
+				background-color: #000000;
+				border-width: 1px;
+				font-size: 18px;
+				border-radius: 5px;
+				color: #FFD700;
+				cursor: pointer;
+			}
+
+			span {
+				height: 200px;
+				width: 200px;
+				background: #FFC0CB;
+				margin: 20px;
+				padding: 5px;
+				font-size: 20px;
+				border-radius: 5px;
+
+			}
+		</style>
+	</head>
+	<body>
+		<div align="center">
+			<div id="D1" class="D1" align="center">
+				<button id="b1" class="B" onclick="begin()">开始</button><br>
+				<!-- <button class="B" onclick="end()">结束</button> -->
+				<br>
+			</div>
+			<div class="Dm">
+				<p id="P2"></p>
+			</div>
+		</div>
+
+		<script>
+			let names = [
+				"刘思进", "谢怡园", "王　鑫", "祝春林", "周新洁", "方舟泉",
+				"李子舰", "何　梁", "夏耀辉", "彭林媛", "董宇辉", "谢　聪",
+				"朱登越", "杨　旭", "王雨萌", "马非凡", "陈　龙", "高滋力",
+				"吴义鹏", "袁　清", "朱澳洲", "黄　镇", "周光粱", "蔡东辰",
+				"邹　豪", "汪智康", "韩宜彬", "王　浩"
+			];
+			//----------------------
+			var d1Obj = document.getElementById("D1");
+			var p2Obj = document.getElementById("P2");
+
+
+			var count = 1;
+			for (let i = 0; i < names.length; i++) {
+				var spanObj = document.createElement("span");
+				spanObj.innerHTML = names[i];
+				d1Obj.appendChild(spanObj);
+
+
+				spanObj.style.cursor = "pointer";
+
+				spanObj.onclick = function() {
+					this.style.color = "#000080";
+					this.style.backgroundColor = "#C0C0C0";
+					names[i] = null;
+					console.log(names);
+
+				}
+
+				//每六个换行
+				if (count == 6) {
+					d1Obj.appendChild(document.createElement("br"));
+					d1Obj.appendChild(document.createElement("br"));
+					count = 0;
+				}
+				count++;
+			}
+
+
+			var spanObjs = document.getElementsByTagName("span");
+			var winningNumber = 0;
+
+			function f1() {
+				//清除
+				spanObjs[winningNumber].style.backgroundColor = "";
+
+				formerColor = spanObjs[winningNumber].style.backgroundColor;
+				//随机
+				winningNumber = Math.floor(Math.random() * spanObjs.length);
+				while (!names[winningNumber]) {
+					winningNumber = Math.floor(Math.random() * spanObjs.length);
+				}
+
+				spanObjs[winningNumber].style.backgroundColor = "#008000";
+
+			}
+
+			var setIntervalStatus;
+
+			var buttonObj1 = document.getElementById("b1");
+			var buttonObj2 = document.createElement("button");
+			buttonObj2.className = "B";
+			buttonObj2.onclick = end;
+			buttonObj2.innerHTML = "结束";
+
+			function begin() {
+				setIntervalStatus = setInterval(f1, 1);
+				d1Obj.replaceChild(buttonObj2, buttonObj1);
+			}
+
+			function end() {
+				clearInterval(setIntervalStatus);
+				p2Obj.innerHTML = names[winningNumber];
+				d1Obj.replaceChild(buttonObj1, buttonObj2);
+			}
+		</script>
+
+	</body>
+</html>

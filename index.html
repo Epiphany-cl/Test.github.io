@@ -43,7 +43,7 @@
         <audio :src="musicData[currentMusicIndex].songSrc" controls autoplay @ended="endedNext()"></audio>
         <button @click="nextMusic()">下一首</button>
         <ul>
-            <li :class="{active:index===currentMusicIndex}" v-for="(item,index) in musicData" :key="index"
+            <li v-cloak :class="{active:index===currentMusicIndex}" v-for="(item,index) in musicData" :key="index"
                 @click="clickMusic(item.id)">
                 <h2>{{index+1}}-歌名：{{item.name}}</h2>
                 <p>{{item.author}}</p>
